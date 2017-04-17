@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <description>application activemq configuration</description>
+
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>file:/Users/panqingqing/githubWorkspaces/config/msg/sc.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="msgSend" class="com.wjs.common.base.mq.MsgSend"/>
+
+    <bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="${activemq.brokerURL}"/>
+        <property name="userName" value="${activemq.userName}"/>
+        <property name="password" value="${activemq.password}"/>
+    </bean>
+
+    <bean id="connectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+        <property name="targetConnectionFactory" ref="activeMQConnectionFactory"></property>
+        <property name="sessionCacheSize" value="${activemq.sessionCacheSize}"/>
+    </bean>
+
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <constructor-arg ref="connectionFactory"/>
+        <property name="pubSubDomain" value="${activemq.pubSubDomain}"/>
+    </bean>
+
+</beans>

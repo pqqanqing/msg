@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>file:/Users/panqingqing/myWorkSpaces/config/msg/sc.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="${activemq.brokerURL}"/>
+        <property name="userName" value="${activemq.userName}"/>
+        <property name="password" value="${activemq.password}"/>
+    </bean>
+
+    <bean id="connectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+        <property name="targetConnectionFactory" ref="activeMQConnectionFactory"></property>
+        <property name="sessionCacheSize" value="${activemq.sessionCacheSize}"/>
+    </bean>
+
+    <!--<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <constructor-arg ref="connectionFactory"/>
+        <property name="pubSubDomain" value="${activemq.pubSubDomain}"/>
+    </bean>-->
+
+    <bean id="messageListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+        <property name="delegate">
+            <bean class="com.wjs.msg.service.msg.MsgServiceImpl"/>
+        </property>
+        <property name="defaultListenerMethod" value="monitorActiveMQ"/>
+    </bean>
+
+    <bean id="messageListenerAdapterContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destination" ref="activeMQQueue"/>
+        <property name="messageListener" ref="messageListenerAdapter"/>
+    </bean>
+
+    <bean id="activeMQQueue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="${activemq.queue}"/>
+    </bean>
+
+</beans>

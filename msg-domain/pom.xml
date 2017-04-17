@@ -2,15 +2,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>msg</artifactId>
         <groupId>com.wjs.msg</groupId>
+        <artifactId>msg</artifactId>
         <version>1.1.0-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.wjs.msg</groupId>
+    <name>msg-domain</name>
+    <description>msg-domain pom file</description>
+
     <artifactId>msg-domain</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.wjs.msg</groupId>
+            <artifactId>msg-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
