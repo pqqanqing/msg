@@ -24,11 +24,11 @@ public class MsgServiceImplTest {
         Map<String, Object> map = new HashMap<>();
         map.put("name", "潘清清");
         List<String> contacts = new ArrayList<>();
-        contacts.add("email://15601870401");
-        contacts.add("email://15601870402");
-        contacts.add("email://15601870403");
-        contacts.add("email://15601870404");
-        contacts.add("email://15601870405");
+        contacts.add("email://pqqanqing");
+        contacts.add("email://pqqkmust");
+        contacts.add("email://pqq");
+        contacts.add("simulate://15601870404");
+        contacts.add("simulate://15601870405");
         msgSend.sendMsg(1L, map, contacts);
     }
 }
