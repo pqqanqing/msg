@@ -19,8 +19,8 @@ public class Sender extends BaseEntity {
     private boolean isSimulate;
 
     public Consumer getConsumer() {
+        //如果是测试的话,可以返回 模仿对象或者不实际做任何动作
         if (isSimulate) return new SimulateConsumer();
-        // TODO: 2017/4/17 修改 
         return (Consumer) ClassUtil.newInstance(ScanClassUtil.getClassMap().get(Consumer.class + protocol).getClass());
     }
 }

@@ -2,7 +2,8 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping default-access="field">
-    <class name="com.wjs.msg.domain.template.Template" table="TB_TEMPLATE" batch-size="100" schema="msg_database" where="logic_delete = 0">
+    <class name="com.wjs.msg.domain.template.Template" table="TB_TEMPLATE" batch-size="100" schema="msg_database"
+           where="logic_delete = 0">
         <!--<cache usage="read-only" />-->
         <comment>消息模板</comment>
         <id name="id" access="property">

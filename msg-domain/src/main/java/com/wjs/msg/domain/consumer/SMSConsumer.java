@@ -19,10 +19,10 @@ import java.net.URL;
  */
 @StatusAndClassNum(superClass = Consumer.class, number = ConsumerDTO.TYPE_SMS, describe = "发消息", parasitClass = Consumer.class)
 public class SMSConsumer extends Consumer {
-    private Logger logger = LoggerFactory.getLogger(SMSConsumer.class);
     private static final String URL = "http://apis.baidu.com/sms_net/smsapi/smsapi";
     private static final String ERR_NUM = "errNum";
     private static final String ERR_MSG = "errMsg";
+    private Logger logger = LoggerFactory.getLogger(SMSConsumer.class);
 
     public SMSConsumer() {
     }
